@@ -1,1 +1,10 @@
+title 0.6
 
+note over browser:
+new note created "hey".
+end note
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+note over server:
+responds with status code 201 created
+end note
+server-->browser: HTTP 201 created
