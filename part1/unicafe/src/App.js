@@ -1,6 +1,21 @@
 import { useState } from 'react'
 
+
+const Header = () => {
+  return(
+  <h1> give feedback </h1>
+  )
+}
 const Statistics = (props) => {
+  
+  if(props.all === 0){
+    return(
+      <div>
+      <h2> statistics </h2>
+      <div> No feedback given </div>
+      </div>
+    )
+  }
   return (
     <div>
       <h2> statistics </h2>
@@ -32,7 +47,7 @@ const positive = (good/all)*100 + " %"
 
   return (
     <div>
-      <h1> give feedback </h1>
+     <Header/>
       <button onClick={handleGoodClick}> good </button>
       <button onClick={handleNeutralClick}> neutral </button>
       <button onClick={handleBadClick}> bad </button>
