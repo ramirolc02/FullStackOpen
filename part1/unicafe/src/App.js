@@ -1,13 +1,31 @@
+import { getValue } from '@testing-library/user-event/dist/utils'
 import { useState } from 'react'
 
 
-const Header = () => {
-  return(
+const Header = () => (
   <h1> give feedback </h1>
+)
+  
+const Button = ({handleClick, text}) => {
+
+  return(
+  <button onClick={handleClick}>
+    {text}
+  </button>
   )
 }
+
+const StatisiticLine = ({text,value}) => (
+
+      <tr>
+        <td> {text} </td>
+        <td> {value} </td>
+      </tr>
+
+)
+
 const Statistics = (props) => {
-  
+
   if(props.all === 0){
     return(
       <div>
@@ -16,18 +34,17 @@ const Statistics = (props) => {
       </div>
     )
   }
-  return (
+ return (
     <div>
       <h2> statistics </h2>
-      <div> good {props.good} </div> 
-      <div> neutral {props.neutral} </div> 
-      <div> bad {props.bad} </div> 
-      <div> all {props.all} </div> 
-      <div> average {props.average} </div> 
-      <div> positive {props.positive} </div> 
+      <StatisiticLine text='good' value={props.good} />
+      <StatisiticLine text='neutral' value={props.neutral} />
+      <StatisiticLine text='bad' value={props.bad} />
+      <StatisiticLine text='all' value={props.all} />
+      <StatisiticLine text='average' value={props.average} />
+      <StatisiticLine text='positive' value={props.positive} />
     </div>
-  )
-
+  ) 
 }
 const App = () => {
   // save clicks of each button to its own state
@@ -39,7 +56,7 @@ const handleGoodClick = () => setGood(good + 1)
 
 const handleNeutralClick = () => setNeutral(neutral + 1)
 
-const handleBadClick = () => setBad(bad + 1)
+const handleBadClick = () => setBad(bad + 1) 
 
 const all = good + neutral + bad
 const average = (good*1 + bad*-1)/all
@@ -48,9 +65,9 @@ const positive = (good/all)*100 + " %"
   return (
     <div>
      <Header/>
-      <button onClick={handleGoodClick}> good </button>
-      <button onClick={handleNeutralClick}> neutral </button>
-      <button onClick={handleBadClick}> bad </button>
+      <Button handleClick={handleGoodClick} text='good' />
+      <Button handleClick={handleNeutralClick} text='neutral' />
+      <Button handleClick={handleBadClick} text='bad'  />
       <Statistics good={good}
       neutral={neutral} 
       bad={bad}
