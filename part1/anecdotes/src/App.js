@@ -1,12 +1,20 @@
 import { useState } from 'react'
 
 
+const Header = () => (
+  <h1>Anecdote of the day</h1>
+)
+
+const Header2 = () => (
+  <h1> Anecdote with most votes</h1>
+)
 
 const Button = ({ handleClick, text }) => (
   <button onClick={handleClick}>
     {text}
   </button>
 )
+
 
 const App = () => {
   const anecdotes = [
@@ -23,6 +31,8 @@ const App = () => {
 
   const[votes, setVotes] = useState(Array(anecdotes.length).fill(0))
 
+  const[max,setMax] =  useState(0)
+
   const handleAnecdote = () => {
     // if result is 7, there is no anecdote in that position(unlikely to happen)
       const rand = Math.floor(Math.random()*anecdotes.length)
@@ -35,8 +45,17 @@ const App = () => {
       setVotes(copy)
   }
 
+  // Can only use the index to get both values
+
+  const maxVotes = () => {
+      const max = Math.max(...votes)
+      return max
+  }
+  const index = votes.indexOf(maxVotes())
+
   return (
     <div>
+      <Header/>
       {anecdotes[selected]} 
       <div> 
         Has {votes[selected]} votes
@@ -44,6 +63,11 @@ const App = () => {
       <div>
         <Button handleClick={handleVoteCount} text='vote'/>
         <Button handleClick={handleAnecdote} text='next anecdote'/>
+      </div>
+      <Header2/>
+      <div> {anecdotes[index]}</div>
+      <div>
+       Has {maxVotes()} votes
       </div>
     </div>
   )
