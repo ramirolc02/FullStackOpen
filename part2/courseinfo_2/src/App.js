@@ -1,5 +1,5 @@
 
-const Header = ({ course }) => <h1>{course}</h1>
+const Header = ({ course }) => <h3>{course}</h3>
 
 const Part = ({ part }) => 
   <p>
@@ -73,6 +73,7 @@ const App = () => {
   // map for each course information
   return (
     <div>
+      <h1> Web development curriculum</h1>
        {courses.map( course => <Course course={course}/>)}
     </div>
   )
