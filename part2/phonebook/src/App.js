@@ -66,7 +66,7 @@ const App = () => {
       </form> 
       <h2>Numbers</h2>
       <ul>
-        {personsCopy.map( person=><Person key={person.id} person={person}/>)}
+        {personsCopy.map( person => <Person key={person.id} person={person}/>)}
       </ul>
     </div>
   )
