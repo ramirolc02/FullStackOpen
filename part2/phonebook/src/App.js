@@ -54,6 +54,18 @@ const App = () => {
     setNewFilter(event.target.value)
  }
 
+ const handleDelete = (personsCopy) => {
+  const popup = `Delete ${personsCopy.name} ?`
+  const confirm = window.confirm(popup)
+  if(confirm){
+  personService
+      .deletePerson(personsCopy.id)
+      .then(returnedPerson => {
+        setPersons(returnedPerson)
+      })
+    }
+ } 
+
  const personsCopy = persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
 
   return (
@@ -64,7 +76,7 @@ const App = () => {
       <PersonForm addPerson={addPerson} handlePersonChange={handlePersonChange} 
       handleNumberChange={handleNumberChange} newName={newName} newNumber={newNumber} />
       <h2>Numbers</h2>
-      <Persons personsCopy={personsCopy}/>
+      <Persons personsCopy={personsCopy} handleDelete={handleDelete}/>
     </div>
   )
 }
