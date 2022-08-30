@@ -21,22 +21,25 @@ const App = () => {
 
    const addPerson = (event) => {
     event.preventDefault()
+    const personObject = {
+      name: newName,
+      number: newNumber
+    }
     // can use function array.some()
     if(persons.filter(person => person.name === newName).length === 0){
-      const personObject = {
-        name: newName,
-        number: newNumber
-      }
       personService
       .create(personObject)
       .then(returnedPerson => {
         setPersons(persons.concat(returnedPerson))
       })
-
     }
     else{
-        alert(`${newName} is already added to phonebook`)
-    }
+       const popup = `${newName} is already added to phonebook, replace the old number with a new one ?`
+       const confirm = window.confirm(popup)
+       if(confirm){
+          handleUpdate(personObject)
+        }
+       }
     setNewName('')
     setNewNumber('')
   }
@@ -65,6 +68,16 @@ const App = () => {
       })
     }
  } 
+
+ const handleUpdate = (personObject) => {
+  const person = persons.find(p => p.name === personObject.name)
+  const id = person.id
+  personService
+          .update(id, personObject)
+          .then(returnedPerson => {
+            setPersons(persons.map(person => person.id !== id ? person : returnedPerson))
+          })
+ }
 
  const personsCopy = persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
 
