@@ -32,6 +32,9 @@ const App = () => {
       .then(returnedPerson => {
         setPersons(persons.concat(returnedPerson))
       })
+      .catch(error => {
+        console.log('fail')
+      })
     }
     else{
        const popup = `${newName} is already added to phonebook, replace the old number with a new one ?`
