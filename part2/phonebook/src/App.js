@@ -4,12 +4,15 @@ import Persons from "./components/Persons"
 import Filter from "./components/Filter"
 import PersonForm from "./components/PersonForm"
 import personService from "./services/persons"
+import Notification from './components/Notification'
+import "./index.css"
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter,setNewFilter] = useState('')
+  const [successMessage, setSuccessMessage]=useState(null)
 
   useEffect(() => {
    personService
@@ -31,6 +34,10 @@ const App = () => {
       .create(personObject)
       .then(returnedPerson => {
         setPersons(persons.concat(returnedPerson))
+        setSuccessMessage(`added ${returnedPerson.name}`)
+        setTimeout(() => {
+          setSuccessMessage(null)
+        }, 5000)
       })
       .catch(error => {
         console.log('fail')
@@ -41,6 +48,10 @@ const App = () => {
        const confirm = window.confirm(popup)
        if(confirm){
           handleUpdate(personObject)
+          setSuccessMessage(`Updated ${newName}'s number`)
+        setTimeout(() => {
+          setSuccessMessage(null)
+        }, 5000)
         }
        }
     setNewName('')
@@ -87,6 +98,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={successMessage}/>
       <Filter filter={filter} handleFilter={handleFilter}/>
       <h3>Add a new</h3>
       <PersonForm addPerson={addPerson} handlePersonChange={handlePersonChange} 
