@@ -44,7 +44,6 @@ const App = () => {
         }, 5000)
       })
       .catch(error => {
-        console.log(error.response.data.error)
         seterrorMessage(error.response.data.error)
         setTimeout(() => {
           seterrorMessage(null)
@@ -83,7 +82,12 @@ const App = () => {
       .deletePerson(personsCopy.id)
       .then(returnedPerson => {
         setPersons(returnedPerson)
+        setsuccessMessage(`deleted ${returnedPerson.name}`)
+        setTimeout(() => {
+          setsuccessMessage(null)
+        }, 5000)
       })
+
     }
  } 
 
