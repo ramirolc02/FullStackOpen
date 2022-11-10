@@ -44,7 +44,11 @@ const App = () => {
         }, 5000)
       })
       .catch(error => {
-        console.log('fail')
+        console.log(error.response.data.error)
+        seterrorMessage(error.response.data.error)
+        setTimeout(() => {
+          seterrorMessage(null)
+        }, 5000)
       })
     }
     else{
