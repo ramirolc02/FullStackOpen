@@ -4,3 +4,5 @@ The main focus is on building single page applications with ReactJS that use RES
 The course covers testing, configuration and environment management, and the use of MongoDB for storing the application’s data.
 Partners and affiliates of the course include Houston Inc, Terveystalo, Elisa, K-ryhmä, Unity Technologies and Konecranes.
 Participants are expected to have good programming skills, basic knowledge of web programming and databases, and to know the basics of working with the Git version-control system. You are also expected to have perseverance and the ability for independent problem solving and information seeking.
+
+Part 3 repository: https://github.com/ramirolc02/FullStackOpen_Part3
