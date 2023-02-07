@@ -1,0 +1,9 @@
+POST http://localhost:3003/api/blogs  
+Content-Type:application/json
+
+{
+"title": "Atomic Habits",
+ "author": "James Clear ",
+ "url":"https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwj018PohIL9AhUKKewKHTFaCigQFnoECCUQAQ&url=https%3A%2F%2Fjamesclear.com%2Fatomic-habits&usg=AOvVaw0o5PGECsACPPj94i7MJHzT",
+ "likes": 999
+}

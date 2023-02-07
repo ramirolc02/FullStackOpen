@@ -28,6 +28,7 @@ const App = () => {
 
    const addPerson = (event) => {
     event.preventDefault()
+
     const personObject = {
       name: newName,
       number: newNumber
@@ -104,7 +105,7 @@ const App = () => {
          }, 5000)
           })
           .catch(error => {
-            seterrorMessage(`Information of ${person.name} has already been removed from server`)
+            seterrorMessage(error.response.data.error)
             setTimeout(() => {
               seterrorMessage(null)
             }, 5000)
