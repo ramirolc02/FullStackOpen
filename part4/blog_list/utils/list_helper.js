@@ -4,7 +4,6 @@ const dummy = (blogs) => {
 
 const totalLikes = (blogs) => {
     const result = blogs.every( blog => 'likes' in blog)
-    console.log(result)
     if (result){
         return  blogs.length===0 ? 0 : blogs.reduce ((acc,blogs) => acc+blogs.likes,0)
     }
@@ -13,4 +12,8 @@ const totalLikes = (blogs) => {
     }
 }
 
-module.exports = { dummy , totalLikes }
+const favoriteBlog = (blogs) => {
+    return blogs.find(blog => blog.likes === Math.max(...blogs.map((blog) => blog.likes))) // could use three dots notation
+}
+
+module.exports = { dummy , totalLikes, favoriteBlog }
