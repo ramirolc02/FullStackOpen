@@ -105,4 +105,13 @@ describe('totalLikes', () => {
           })
         })
     }) 
+
+    describe ('mostBlogs function', () => {
+      test('return an object with the author that has the largest amount of blogs and the number of blogs', ()=> {
+        expect(listHelper.mostBlogs(blogs)).toEqual({
+            author: "Robert C. Martin",
+            blogs: 3
+        })
+      })
+    })
   
