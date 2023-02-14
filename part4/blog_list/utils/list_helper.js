@@ -31,4 +31,22 @@ const mostBlogs = (blogs) => {
         blogs: Math.max(...numbers)
     }
 }
-module.exports = { dummy , totalLikes, favoriteBlog, mostBlogs }
+
+const mostLikes = (blogs) => {
+
+   // getting array with filter()
+   const authors = blogs.map(blog => blog.author)
+   const unique = authors.filter((author,index) => authors.indexOf(author) === index)
+   const likes = new Array(unique.length).fill(0)
+
+   blogs.map(blog => likes[unique.indexOf(blog.author)]+=blog.likes)
+
+   return {
+    author: unique[likes.indexOf(Math.max(...likes))],
+    likes: Math.max(...likes)
+}
+
+
+}
+
+module.exports = { dummy , totalLikes, favoriteBlog, mostBlogs, mostLikes }
