@@ -67,6 +67,19 @@ test('likes property missing', async () => {
         expect(res.body.likes).toBe(0)
 })
 
+test('verify title and url properties', async () => {
+    
+    const newBlog = {
+         "author": "James Clear ",
+         "url":"https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwj018PohIL9AhUKKewKHTFaCigQFnoECCUQAQ&url=https%3A%2F%2Fjamesclear.com%2Fatomic-habits&usg=AOvVaw0o5PGECsACPPj94i7MJHzT"
+        }
+
+    await api
+            .post('/api/blogs')
+            .send(newBlog)
+            .expect(400)
+})
+
 afterAll(async () => {
   await mongoose.connection.close()
 })
