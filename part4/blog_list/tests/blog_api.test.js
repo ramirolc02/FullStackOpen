@@ -52,6 +52,21 @@ test('post creates new blog succesfully', async () => {
         )
 })
 
+test('likes property missing', async () => {
+    const newBlog = {
+        "title": "Atomic Habits",
+         "author": "James Clear ",
+         "url":"https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwj018PohIL9AhUKKewKHTFaCigQFnoECCUQAQ&url=https%3A%2F%2Fjamesclear.com%2Fatomic-habits&usg=AOvVaw0o5PGECsACPPj94i7MJHzT"
+        }
+
+        const res = await api
+                    .post('/api/blogs')
+                    .send(newBlog)
+                    .expect(201)
+        
+        expect(res.body.likes).toBe(0)
+})
+
 afterAll(async () => {
   await mongoose.connection.close()
 })

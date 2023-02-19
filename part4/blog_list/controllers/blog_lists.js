@@ -10,8 +10,13 @@ listsRouter.get('/', (request, response) => {
   })
   
   listsRouter.post('/', (request, response) => {
-    const blog = new Blog(request.body)
 
+    if (!('likes' in request.body)){
+      request.body.likes = 0
+    }
+
+    const blog = new Blog(request.body)
+    
     blog
       .save()
       .then(result => {
