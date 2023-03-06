@@ -35,11 +35,16 @@ listsRouter.get('/', async (request, response) => {
     return response.status(204).end()
   })
 
-  listsRouter.put('/:id', async(request,response,next)=> {
+  listsRouter.put('/:id', async(request,response)=> {
     
-    const blog = request.body
-    const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, {new:true})
-    response.json(updatedBlog)
+    const blog = await Blog.findById(request.params.id);
+
+    if(!blog){
+      return response.status(400).json({error: 'Blog does not exist '})
+    }
+    const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, request.body, {new:true});
+    response.status(200).json(updatedBlog);
+    
   })
 
   module.exports = listsRouter
