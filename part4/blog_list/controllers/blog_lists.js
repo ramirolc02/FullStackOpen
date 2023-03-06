@@ -1,8 +1,9 @@
 const listsRouter = require('express').Router()
+const { request, response } = require('../app')
 const Blog = require('../models/blog')
 
 listsRouter.get('/', async (request, response) => {
-      blogs = await Blog.find({})
+      const blogs = await Blog.find({})
       response.json(blogs)
   })
   
@@ -21,10 +22,24 @@ listsRouter.get('/', async (request, response) => {
         error: 'url is missing'
     })
     }
-  
     const blog = new Blog(request.body)
     const savedBlog = await blog.save()
     response.status(201).json(savedBlog)
+  })
+
+  listsRouter.delete('/:id', async(request,response) =>{
+    const blogListToDelet = await Blog.findByIdAndRemove(request.params.id);
+    if (!blogListToDelet){
+      return response.status(400).json({error: 'Blog does not exist '})
+    }
+    return response.status(204).end()
+  })
+
+  listsRouter.put('/:id', async(request,response,next)=> {
+    
+    const blog = request.body
+    const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, {new:true})
+    response.json(updatedBlog)
   })
 
   module.exports = listsRouter

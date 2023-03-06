@@ -4,8 +4,9 @@ require('express-async-errors')
 const app = express()
 const listsRouter = require('./controllers/blog_lists')
 const cors = require('cors')
-const mongoose = require('mongoose')
+const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
+const mongoose = require('mongoose')
 
 mongoose.set('strictQuery', false)
 
@@ -22,5 +23,7 @@ mongoose.connect(config.MONGODB_URI)
 app.use(cors())
 app.use(express.json())
 app.use('/api/blogs', listsRouter)
+app.use(middleware.unknownEndpoint)
+app.use(middleware.errorHandler)
 
 module.exports = app
