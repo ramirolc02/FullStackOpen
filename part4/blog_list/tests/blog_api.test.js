@@ -86,14 +86,38 @@ describe("Validating error and missing parameters",()=>{
 })
 
 describe("Tests for deleting single blog resource", ()=>{
-    test("Succeeds wiuth status code 204", async () => {
+    test("Succeeds with status code 204", async () => {
         const blogsAtStart = await helper.blogsInDb()
         const blogToDelete = blogsAtStart[0];
 
         await api.delete(`/api/blogs/${blogToDelete.id}`).expect(204);
+    });
+    test("Exits with status code 400", async () => {
+        await api.delete(`/api/blogs/${13}`).expect(400);
     })
-    
 });
+
+describe(" Testing update by id ",() => {
+    test("Succeeds with status code 200", async () => {
+
+        const blogsAtStart = await helper.blogsInDb()
+        const blogToUpdate = blogsAtStart[0];
+
+        const updatedBlog = await api.put(`/api/blogs/${blogToUpdate.id}`).send({likes: 20});
+
+
+        expect(updatedBlog.body).toEqual({ 
+            id: '5a422aa71b54a676234d17f8',
+            title: 'Go To Statement Considered Harmful',
+            author: 'Edsger W. Dijkstra',
+            url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
+            likes: 20
+        })
+    });
+    test("Exits with status code 400", async () => {
+        await api.put(`/api/blogs/${13}`).expect(400);
+    });
+})
 
 
 afterAll(async () => {
